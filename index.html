@@ -80,33 +80,45 @@ const noMessages = [
     "Please, Foxyy? 🥹"
 ];
 
-let clickCount = 0;
-let yesSize = 1;
+
+    let clickCount = 0;
+
+let yesFontSize = 24;
+let yesPaddingX = 40;
+let yesPaddingY = 15;
 
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 
 noBtn.addEventListener("click", () => {
 
-    yesSize += 0.25;
+    // make YES bigger gradually
+    yesFontSize += 2;
+    yesPaddingX += 5;
+    yesPaddingY += 2;
 
-    yesBtn.style.transform = `scale(${yesSize})`;
+    yesBtn.style.fontSize = yesFontSize + "px";
+    yesBtn.style.padding =
+        yesPaddingY + "px " +
+        yesPaddingX + "px";
 
+    // update NO text
     if(clickCount < noMessages.length){
         noBtn.textContent = noMessages[clickCount];
     }
 
+    // shrink NO slightly
+    let noScale = Math.max(0.6, 1 - (clickCount * 0.03));
+    noBtn.style.transform = `scale(${noScale})`;
+
     clickCount++;
 
-    if(clickCount > 10){
-        noBtn.style.opacity = "0.5";
-    }
-
-    if(clickCount > 12){
+    // eventually hide NO
+    if(clickCount > 15){
         noBtn.style.display = "none";
     }
 });
-
+    
 yesBtn.addEventListener("click", () => {
 
     document.body.innerHTML = `
