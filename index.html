@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Date Request ❤️</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    background:white;
+    text-align:center;
+}
+
+img{
+    width:180px;
+    margin-bottom:20px;
+}
+
+h1{
+    font-size:42px;
+    margin-bottom:30px;
+}
+
+.buttons{
+    display:flex;
+    gap:15px;
+}
+
+button{
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    color:white;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+#yesBtn{
+    background:#4CAF50;
+    font-size:24px;
+    padding:15px 40px;
+}
+
+#noBtn{
+    background:#E53935;
+    font-size:18px;
+    padding:15px 25px;
+}
+</style>
+</head>
+<body>
+
+<img src="https://media.tenor.com/4f4KX0vP6K0AAAAi/bear-love.gif">
+
+<h1>Manyaaa, Will you go on a date with me? 🥺❤️</h1>
+
+<div class="buttons">
+    <button id="yesBtn">Yes 😍</button>
+    <button id="noBtn">No 😭</button>
+</div>
+
+<script>
+
+const noMessages = [
+    "Are you sure? 🥺",
+    "wut if i gift u a diet coke? 😭",
+    "Pretty please 👉👈",
+    "I'll buy you Boba Tea ☕",
+    "Free ice cream 🍦",
+    "Unlimited Breads 😂",
+    "Last chance 😭",
+    "You are breaking my heart 💔",
+    "Okay fine... 😢",
+    "Please, Foxyy? 🥹"
+];
+
+let clickCount = 0;
+let yesSize = 1;
+
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("click", () => {
+
+    yesSize += 0.25;
+
+    yesBtn.style.transform = `scale(${yesSize})`;
+
+    if(clickCount < noMessages.length){
+        noBtn.textContent = noMessages[clickCount];
+    }
+
+    clickCount++;
+
+    if(clickCount > 10){
+        noBtn.style.opacity = "0.5";
+    }
+
+    if(clickCount > 12){
+        noBtn.style.display = "none";
+    }
+});
+
+yesBtn.addEventListener("click", () => {
+
+    document.body.innerHTML = `
+        <img src="https://media.tenor.com/3dM5QYg7l7QAAAAi/bear-kiss.gif" width="220">
+        <h1 style="color:#ff4081">
+            YAYYYYY ❤️🎉
+        </h1>
+        <h2>
+            It's a date 😎☕🍕
+        </h2>
+    `;
+});
+
+</script>
+
+</body>
+</html>
