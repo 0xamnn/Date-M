@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -6,15 +7,35 @@
 <title>Date Request ❤️</title>
 
 <style>
+
 body{
-    font-family: Arial, sans-serif;
+    margin:0;
+    overflow:hidden;
+    height:100vh;
+
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    height:100vh;
-    background:white;
+
+    font-family:Arial,sans-serif;
     text-align:center;
+
+    background:linear-gradient(
+        180deg,
+        #ffb6c1 0%,
+        #ffc0cb 40%,
+        #ffd6de 100%
+    );
+
+    position:relative;
+}
+
+img,
+h1,
+.buttons{
+    position:relative;
+    z-index:10;
 }
 
 img{
@@ -23,18 +44,21 @@ img{
 }
 
 h1{
-    font-size:42px;
+    color:white;
+    font-size:48px;
     margin-bottom:30px;
+    text-shadow:0 4px 10px rgba(0,0,0,0.15);
 }
 
 .buttons{
     display:flex;
-    gap:15px;
+    gap:30px;
+    align-items:center;
 }
 
 button{
     border:none;
-    border-radius:8px;
+    border-radius:12px;
     cursor:pointer;
     color:white;
     font-weight:bold;
@@ -52,8 +76,36 @@ button{
     font-size:18px;
     padding:15px 25px;
 }
+
+.heart{
+    position:absolute;
+    bottom:-50px;
+    color:rgba(255,80,120,0.4);
+    pointer-events:none;
+    animation:floatUp linear infinite;
+}
+
+@keyframes floatUp{
+
+    from{
+        transform:translateY(0);
+        opacity:0;
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    to{
+        transform:translateY(-120vh);
+        opacity:0;
+    }
+}
+
 </style>
+
 </head>
+
 <body>
 
 <img src="https://media.tenor.com/4f4KX0vP6K0AAAAi/bear-love.gif">
@@ -69,19 +121,22 @@ button{
 
 const noMessages = [
     "Are you sure? 🥺",
-    "wut if i gift u a diet coke? 😭",
+    "What if I gift u a Diet Coke? 🥤",
     "Pretty please 👉👈",
-    "I'll buy you Boba Tea ☕",
+    "What if I bring bread? 🍞",
+    "Unlimited breads 😂",
+    "Boba Tea included 🧋",
     "Free ice cream 🍦",
-    "Unlimited Breads 😂",
+    "Manyaaaa 😭",
+    "Foxyyyy 🥺",
+    "Okay, what about momos? 🥟",
+    "Still no? 😔",
+    "You're breaking my heart 💔",
     "Last chance 😭",
-    "You are breaking my heart 💔",
-    "Okay fine... 😢",
-    "Please, Foxyy? 🥹"
+    "Please? 🥹"
 ];
 
-
-    let clickCount = 0;
+let clickCount = 0;
 
 let yesFontSize = 24;
 let yesPaddingX = 40;
@@ -92,7 +147,6 @@ const noBtn = document.getElementById("noBtn");
 
 noBtn.addEventListener("click", () => {
 
-    // make YES bigger gradually
     yesFontSize += 2;
     yesPaddingX += 5;
     yesPaddingY += 2;
@@ -102,35 +156,58 @@ noBtn.addEventListener("click", () => {
         yesPaddingY + "px " +
         yesPaddingX + "px";
 
-    // update NO text
     if(clickCount < noMessages.length){
         noBtn.textContent = noMessages[clickCount];
     }
 
-    // shrink NO slightly
     let noScale = Math.max(0.6, 1 - (clickCount * 0.03));
     noBtn.style.transform = `scale(${noScale})`;
 
     clickCount++;
 
-    // eventually hide NO
     if(clickCount > 15){
         noBtn.style.display = "none";
     }
 });
-    
+
 yesBtn.addEventListener("click", () => {
 
     document.body.innerHTML = `
         <img src="https://media.tenor.com/3dM5QYg7l7QAAAAi/bear-kiss.gif" width="220">
-        <h1 style="color:#ff4081">
+
+        <h1 style="color:#ff4081;">
             YAYYYYY ❤️🎉
         </h1>
+
         <h2>
             It's a date 😎☕🍕
         </h2>
     `;
 });
+
+function createHeart(){
+
+    const heart = document.createElement("div");
+
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+
+    heart.style.left = Math.random()*100 + "vw";
+
+    heart.style.fontSize =
+        (Math.random()*25 + 15) + "px";
+
+    heart.style.animationDuration =
+        (Math.random()*6 + 6) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },12000);
+}
+
+setInterval(createHeart,300);
 
 </script>
 
